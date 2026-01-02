@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Bliss - Management System</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===== GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #328b902c;
+      color: #cb4b93;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      color: #25add7;
+    }
+
+    p {
+      color: #6d4c41;
+      line-height: 1.6;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background:
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      z-index: 1;
+    }
+
+    .btn {
+      margin-top: 2rem;
+      background-color: #d7a86e;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .btn:hover {
+      background-color: #b67b45;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #4e342e;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      z-index: 10;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #d7a86e;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      width: 60px;
+      height: 4px;
+      background: #d7a86e;
+      display: block;
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    /* ===== MENU ===== */
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .menu-item {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .menu-item h3 {
+      color: #4e342e;
+      margin: 0.8rem;
+    }
+
+    .menu-item p {
+      padding: 0 1rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    /* ===== ORDER MANAGEMENT ===== */
+    .orders {
+      background-color: #fbe9e7;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid #f0d7b5;
+    }
+
+    th {
+      background-color: #d7a86e;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #fff3e0;
+    }
+
+    /* ===== STAFF ===== */
+    .staff-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .staff {
+      background: #fff;
+      width: 260px;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .staff:hover {
+      transform: translateY(-8px);
+    }
+
+    .staff img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .staff h3 {
+      margin-top: 1rem;
+      color: #4e342e;
+    }
+
+    .staff p {
+      font-size: 0.9rem;
+      color: #6d4c41;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      text-align: center;
+      background-color: #4e342e;
+      color: white;
+      padding: 3rem 1rem;
+      border-radius: 12px;
+    }
+
+    .contact i {
+      color: #d7a86e;
+      margin-right: 8px;
+    }
+
+    .social-icons {
+      margin-top: 1.5rem;
+    }
+
+    .social-icons a {
+      color: #fff;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #d7a86e;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #3e2723;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 700px) {
+      header h1 { font-size: 2.2rem; }
+      header p { font-size: 1rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <h1>☕ Café Bliss</h1>
+    <p>Where every sip tells a story...</p>
+    <a href="#menu" class="btn">Explore Menu</a>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#orders">Orders</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- MENU SECTION -->
+  <section id="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-container">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348" alt="Espresso">
+        <h3>Espresso</h3>
+        <p>Strong and bold coffee brewed to perfection. ₹120</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1558709116-ef5b1a1db9a9" alt="Cappuccino">
+        <h3>Cappuccino</h3>
+        <p>Classic Italian coffee with creamy froth. ₹150</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1523942839745-7848d4c12d46" alt="Pastry">
+        <h3>Chocolate Pastry</h3>
+        <p>Soft, rich, and layered with chocolate cream. ₹90</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c" alt="Sandwich">
+        <h3>Grilled Sandwich</h3>
+        <p>Loaded with veggies and cheese. ₹110</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDER MANAGEMENT SECTION -->
+  <section id="orders">
+    <h2>Current Orders</h2>
+    <div class="orders">
+      <table>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Item</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>#001</td>
+          <td>Ananya</td>
+          <td>Cappuccino</td>
+          <td>Preparing</td>
+        </tr>
+        <tr>
+          <td>#002</td>
+          <td>Rohan</td>
+          <td>Grilled Sandwich</td>
+          <td>Ready</td>
+        </tr>
+        <tr>
+          <td>#003</td>
+          <td>Pooja</td>
+          <td>Chocolate Pastry</td>
+          <td>Delivered</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p><i class="fa-solid fa-location-dot"></i>MG Road, Bengaluru, India</p>
+    <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+    <p><i class="fa-solid fa-envelope"></i> cafebliss@gmail.com</p>
+
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Café Bliss | All Rights Reserved
+  </footer>
+</body>
+</html>
